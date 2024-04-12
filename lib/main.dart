@@ -1,7 +1,9 @@
+import 'package:cook_book/componets/products.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'componets/horizontral_listview.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-
+import 'package:cook_book/pronas.dart';
 
 void main() {
   runApp(
@@ -19,12 +21,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<String> imagesList = [
-    "assets/images/logo.jpg",
-    "assets/images/photo2.jpg",
-    "assets/images/photo3.jpeg",
-    "assets/images/photo4.jpeg",
+    "assets/images/logo2.jpg",
+    "assets/images/desert.jpg",
+    "assets/images/garnir.jpg",
+    "assets/images/ice.jpg",
     "assets/images/photo5.jpg",
-    "assets/images/photo6.jpeg",
+    "assets/images/salat.jpg",
+    "assets/images/sup.jpg",
+    "assets/images/copybook.jpg",
+    "assets/images/sup.jpg",
   ];
 
   final CarouselController _carouselController = CarouselController();
@@ -55,7 +60,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0.1,
         backgroundColor: Colors.black,
-        title: const Text('Top_Cook_Book'),
+        title: const Text(
+          'Recipe Book',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -85,28 +94,26 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: const ListTile(
-                title: Text('Мій акаунт'),
-                leading: Icon(Icons.person, color: Colors.black),
-              ),
-            ),
+            //меню на кожен день (сніданок,обід,вечеря)?
             InkWell(
               onTap: () {},
               child: const ListTile(
                 title: Text('Категорії'),
                 leading: Icon(Icons.menu_book, color: Colors.black),
-
+                //оцінити нас 5 зірок
+                //флаєрки з продуктами
               ),
             ),
             InkWell(
-              onTap: () {},
-              child: const ListTile(
+              onTap: () {
+                launchUrl(Uri.parse('https://t.me/top_cook_book_bot'));
+              },
+              child: ListTile(
                 title: Text('Телеграм'),
                 leading: Icon(Icons.telegram, color: Colors.blue),
               ),
             ),
+
             InkWell(
               onTap: () {},
               child: const ListTile(
@@ -114,16 +121,15 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(Icons.favorite, color: Colors.redAccent),
               ),
             ),
+// якщо користувач зареєструвався він зможе зберігати рецепти
             const Divider(),
             InkWell(
-              onTap: () {},
-              child: const ListTile(
-                title: Text('Настройки'),
-                leading: Icon(Icons.settings, color: Colors.grey),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutPage()),
+                );
+              },
               child: const ListTile(
                 title: Text('Про нас'),
                 leading: Icon(Icons.help, color: Colors.blue),
@@ -143,10 +149,21 @@ class _HomePageState extends State<HomePage> {
         children: [
           imageCarousel,
 
-          new Padding(padding: const EdgeInsets.all(8.0),
-          child: new Text('Категорії'),),
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Text('Категорії'),
+          ),
+          //флаєрки інгрідієнтів
+          HorizontalList(),
 
-
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Text('Рекомендації'),
+          ),
+          Container(
+            height: 320.0,
+            child: Product(),
+          )
         ],
       ),
     );
