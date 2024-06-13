@@ -1,9 +1,9 @@
-import 'package:cook_book/componets/products.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'componets/horizontral_listview.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cook_book/pronas.dart';
+import 'componets/products.dart';
+import 'pronas.dart';
 
 void main() {
   runApp(
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           'Recipe Book',
           style: TextStyle(color: Colors.white),
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -79,10 +79,11 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: const Text('Snizhana Tyman'),
-              accountEmail: const Text('mamchaksnizana@gmail.com'),
+              accountName: Text('Snizhana Tyman'),
+              accountEmail: Text('mamchaksnizana@gmail.com'),
               currentAccountPicture: GestureDetector(
-                child: const CircleAvatar(
+
+                child: CircleAvatar(
                   backgroundColor: Colors.grey,
                   child: Icon(
                     Icons.person,
@@ -90,30 +91,26 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.black,
               ),
             ),
-            //меню на кожен день (сніданок,обід,вечеря)?
             InkWell(
               onTap: () {},
               child: const ListTile(
                 title: Text('Категорії'),
                 leading: Icon(Icons.menu_book, color: Colors.black),
-                //оцінити нас 5 зірок
-                //флаєрки з продуктами
               ),
             ),
             InkWell(
               onTap: () {
                 launchUrl(Uri.parse('https://t.me/top_cook_book_bot'));
               },
-              child: ListTile(
+              child: const ListTile(
                 title: Text('Телеграм'),
                 leading: Icon(Icons.telegram, color: Colors.blue),
               ),
             ),
-
             InkWell(
               onTap: () {},
               child: const ListTile(
@@ -121,7 +118,6 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(Icons.favorite, color: Colors.redAccent),
               ),
             ),
-// якщо користувач зареєструвався він зможе зберігати рецепти
             const Divider(),
             InkWell(
               onTap: () {
@@ -148,17 +144,14 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: [
           imageCarousel,
-
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Категорії'),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Категорії'),
           ),
-          //флаєрки інгрідієнтів
           HorizontalList(),
-
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Рекомендації'),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Рекомендації'),
           ),
           Container(
             height: 320.0,

@@ -7,34 +7,34 @@ class HorizontalList extends StatelessWidget {
       height: 130.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
+        children: const <Widget>[
           Category(
-            image_location: 'assets/images/pomedor/suppomedor.jpg',
-            image_caption: 'Перша страва',
+            imageLocation: 'assets/images/pomedor/suppomedor.jpg',
+            imageCaption: 'Перша страва',
           ),
           Category(
-            image_location: 'assets/images/pomedor/maincourse.jpg',
-            image_caption: 'Друга страва ',
+            imageLocation: 'assets/images/pomedor/maincourse.jpg',
+            imageCaption: 'Друга страва',
           ),
           Category(
-            image_location: 'assets/images/pomedor/salatpomedor.jpg',
-            image_caption: 'Салати',
+            imageLocation: 'assets/images/pomedor/salatpomedor.jpg',
+            imageCaption: 'Салати',
           ),
           Category(
-            image_location: 'assets/images/pomedor/veganpomedor.jpg',
-            image_caption: 'Veg',
+            imageLocation: 'assets/images/pomedor/veganpomedor.jpg',
+            imageCaption: 'Veg',
           ),
           Category(
-            image_location: 'assets/images/pomedor/drinkpomedor6.jpg',
-            image_caption: 'Напої',
+            imageLocation: 'assets/images/pomedor/drinkpomedor6.jpg',
+            imageCaption: 'Напої',
           ),
           Category(
-            image_location: 'assets/images/pomedor/desertpomedor.jpg',
-            image_caption: 'Десерти',
+            imageLocation: 'assets/images/pomedor/desertpomedor.jpg',
+            imageCaption: 'Десерти',
           ),
           Category(
-            image_location: 'assets/images/pomedor/icepomedor.jpg',
-            image_caption: 'Морозиво',
+            imageLocation: 'assets/images/pomedor/icepomedor.jpg',
+            imageCaption: 'Морозиво',
           ),
         ],
       ),
@@ -43,14 +43,14 @@ class HorizontalList extends StatelessWidget {
 }
 
 class Category extends StatelessWidget {
-  final String image_location;
-  final String image_caption;
+  final String imageLocation;
+  final String imageCaption;
 
   const Category({
-    super.key,
-    required this.image_location,
-    required this.image_caption,
-  });
+    Key? key,
+    required this.imageLocation,
+    required this.imageCaption,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,18 +61,19 @@ class Category extends StatelessWidget {
         child: Container(
           width: 100.0,
           child: ListTile(
-              title: Image.asset(
-                image_location,
-                width: 100.0,
-                height: 80.0,
+            title: Image.asset(
+              imageLocation,
+              width: 100.0,
+              height: 80.0,
+            ),
+            subtitle: Container(
+              alignment: Alignment.topCenter,
+              child: Text(
+                imageCaption,
+                style: const TextStyle(fontSize: 12.0),
               ),
-              subtitle: Container(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  image_caption,
-                  style: new TextStyle(fontSize: 12.0),
-                ),
-              )),
+            ),
+          ),
         ),
       ),
     );

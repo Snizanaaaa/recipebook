@@ -1,5 +1,6 @@
+import 'package:cook_book/pages/product_datails.dart';
 import 'package:flutter/material.dart';
-import 'package:cook_book/pages/product_datalis.dart';
+import '../pages/product_details.dart'; // Переконайтеся, що імпортуєте правильний файл з деталями продукту
 
 class Product extends StatefulWidget {
   @override
@@ -7,89 +8,107 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
-  var product_list = [
+  final List<Map<String, Object>> productList = [
     {
       "name": "А-ЛЯ ЦЕЗАР",
       "picture": "assets/images/products/SalatCezar.jpg",
-      "Cooking_time": 25,
+      "cookingTime": 25,
     },
     {
       "name": "БОРЩ З КАРАСІВ",
       "picture": "assets/images/products/supzkarasiv.jpg",
-      "Cooking_time": 25,
+      "cookingTime": 40,
     },
     {
-      "name": "БОРЩ З КАРАСІВ",
-      "picture": "assets/images/products/supzkarasiv.jpg",
-      "Cooking_time": 25,
+      "name": "Морозиво",
+      "picture": "assets/images/products/moz.jpg",
+      "cookingTime": 40,
     },
     {
-      "name": "БОРЩ З КАРАСІВ",
-      "picture": "assets/images/products/supzkarasiv.jpg",
-      "Cooking_time": 25,
-    },
-    {
-      "name": "БОРЩ З КАРАСІВ",
-      "picture": "assets/images/products/supzkarasiv.jpg",
-      "Cooking_time": 25,
-    },
-    {
-      "name": "БОРЩ З КАРАСІВ",
-      "picture": "assets/images/products/supzkarasiv.jpg",
-      "Cooking_time": 25,
+      "name": "Банановий коктель",
+      "picture": "assets/images/products/banantop.jpg",
+      "cookingTime": 40,
     },
 
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: product_list.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemCount: productList.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         return SimilarRecipes(
-          prod_name: product_list[index]['name'],
-          prod_picture: product_list[index]['picture'],
-          prod_Cooking_time: product_list[index]['Cooking_time'],
+          prodName: productList[index]['name'] as String,
+          prodPicture: productList[index]['picture'] as String,
+          prodCookingTime: productList[index]['cookingTime'] as int,
         );
       },
     );
   }
 }
 
-class SimilarRecipes extends StatelessWidget {
-  final prod_name;
-  final prod_picture;
-  final prod_Cooking_time;
+class SimilarRecipes extends StatefulWidget {
+  final String prodName;
+  final String prodPicture;
+  final int prodCookingTime;
 
-  SimilarRecipes({this.prod_name,
-    this.prod_picture,
-    this.prod_Cooking_time});
+  const SimilarRecipes({
+    Key? key,
+    required this.prodName,
+    required this.prodPicture,
+    required this.prodCookingTime,
+  }) : super(key: key);
+
+  @override
+  _SimilarRecipesState createState() => _SimilarRecipesState();
+}
+
+class _SimilarRecipesState extends State<SimilarRecipes> {
+  bool isLiked = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Hero(
-        tag: prod_name,
+        tag: widget.prodName,
         child: Material(
           child: InkWell(
-            //розміщення нової сторінки над головною нажимаючи на іконку
-            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                builder: (context) => new ProductDetalis())),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                productDetailsName: widget.prodName,
+                productDetailsPicture: widget.prodPicture,
+                productDetailsCookingTime: widget.prodCookingTime,
+              ),
+            )),
             child: GridTile(
               footer: Container(
                 color: Colors.white70,
                 child: ListTile(
                   leading: Text(
-                    prod_name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    widget.prodName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      isLiked ? Icons.favorite : Icons.favorite_border,
+                      color: isLiked ? Colors.red : null,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                      if (isLiked) {
+                        // Додайте логіку для вподобання рецепту
+                      } else {
+                        // Додайте логіку для скасування вподобання рецепту
+                      }
+                    },
                   ),
                 ),
               ),
               child: Image.asset(
-                prod_picture,
+                widget.prodPicture,
                 fit: BoxFit.cover,
               ),
             ),
