@@ -19,14 +19,15 @@ class _ProductState extends State<Product> {
       "picture": "assets/images/products/supzkarasiv.jpg",
       "cookingTime": 40,
     },
-    {
-      "name": "Морозиво",
-      "picture": "assets/images/products/moz.jpg",
-      "cookingTime": 40,
-    },
+
     {
       "name": "Банановий коктель",
       "picture": "assets/images/products/banantop.jpg",
+      "cookingTime": 40,
+    },
+    {
+      "name": "Морозиво",
+      "picture": "assets/images/products/moz.jpg",
       "cookingTime": 40,
     },
 
